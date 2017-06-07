@@ -23,8 +23,12 @@ void MainWindow::paintEvent(QPaintEvent* event)
     image3.load("butterfly.png");
 
     QPainter painter(this);
+    painter.setCompositionMode(QPainter::CompositionMode_Difference);
     painter.drawImage(QPoint(10, 10), image);
+    painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.drawImage(QPoint(10, 10), image2);
+    painter.setCompositionMode(QPainter::CompositionMode_Xor);
     painter.drawImage(QPoint(300, 10), image);
+    painter.setCompositionMode(QPainter::CompositionMode_SoftLight);
     painter.drawImage(QPoint(300, 40), image3);
 }
