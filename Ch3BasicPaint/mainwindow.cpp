@@ -64,7 +64,12 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-    //image.size();
+    QImage newImage(event->size(), QImage::Format_RGB32);
+    newImage.fill(qRgb(255, 255, 255));
+
+    QPainter painter(&newImage);
+    painter.drawImage(QPoint(0, 0), image);
+    image = newImage;
 }
 
 void MainWindow::on_actionSave_triggered()
