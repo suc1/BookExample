@@ -46,6 +46,10 @@ private slots:
     void on_actionBlue_triggered();
 
 private:
+    void CheckMenuPoint();
+    void CheckMenuColor();
+
+private:
     Ui::MainWindow *ui;
 
     QImage image;

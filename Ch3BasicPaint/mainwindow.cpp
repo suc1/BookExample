@@ -12,6 +12,13 @@ MainWindow::MainWindow(QWidget *parent) :
     drawing = false;
     brushColor = Qt::black;
     brushSize = 2;
+
+    QAction* menuAll[]={ui->action2px, ui->action5px, ui->action10px,
+                       ui->actionBlack, ui->actionBlue, ui->actionGreen, ui->actionRed, ui->actionWhite};
+    for(QAction* item : menuAll) item->setCheckable(true);
+
+    CheckMenuPoint();
+    CheckMenuColor();
 }
 
 MainWindow::~MainWindow()
@@ -77,39 +84,70 @@ void MainWindow::on_actionClear_triggered()
 void MainWindow::on_action2px_triggered()
 {
     brushSize = 2;
+    CheckMenuPoint();
 }
 
 void MainWindow::on_action5px_triggered()
 {
     brushSize = 5;
+    CheckMenuPoint();
 }
 
 void MainWindow::on_action10px_triggered()
 {
     brushSize = 10;
+    CheckMenuPoint();
 }
 
 void MainWindow::on_actionBlack_triggered()
 {
     brushColor = Qt::black;
+    CheckMenuColor();
 }
 
 void MainWindow::on_actionWhite_triggered()
 {
     brushColor = Qt::white;
+    CheckMenuColor();
 }
 
 void MainWindow::on_actionRed_triggered()
 {
     brushColor = Qt::red;
+    CheckMenuColor();
 }
 
 void MainWindow::on_actionGreen_triggered()
 {
     brushColor = Qt::green;
+    CheckMenuColor();
 }
 
 void MainWindow::on_actionBlue_triggered()
 {
     brushColor = Qt::blue;
+    CheckMenuColor();
+}
+
+void MainWindow::CheckMenuPoint()
+{
+    struct MenuSize
+    {
+    QAction *it;
+    int size;
+    };
+    MenuSize allMenu[]={{ui->action2px, 2}, {ui->action5px, 5}, {ui->action10px, 10} };
+
+    for(MenuSize one : allMenu ) one.it->setChecked(brushSize==one.size);
+    //Todo: define a template
+}
+
+void MainWindow::CheckMenuColor()
+{
+    //todo: use template
+    ui->actionBlack->setChecked(brushColor == Qt::black);
+    ui->actionBlue->setChecked(brushColor == Qt::blue);
+    ui->actionGreen->setChecked(brushColor == Qt::green);
+    ui->actionRed->setChecked(brushColor == Qt::red);
+    ui->actionWhite->setChecked(brushColor == Qt::white);
 }
