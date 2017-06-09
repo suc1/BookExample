@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QOpenGLWindow>
+#include <QSurfaceFormat>
+#include <QOpenGLFunctions>
+#include <QtOpenGL>
+#include <GL/glu.h>
 
 class MainWindow : public QOpenGLWindow
 {
@@ -10,14 +14,17 @@ class MainWindow : public QOpenGLWindow
     public:
         explicit MainWindow(QWidget *parent = 0);
         ~MainWindow();
-    protected:
+
+protected:
         virtual void initializeGL();
         virtual void resizeGL(int w, int h);
         virtual void paintGL();
         void paintEvent(QPaintEvent *event);
         void resizeEvent(QResizeEvent *event);
-    private:
 
+private:
+        QOpenGLContext* context;
+        QOpenGLFunctions* openGLFunctions;
 };
 
 #endif // MAINWINDOW_H
