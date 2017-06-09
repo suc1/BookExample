@@ -1,37 +1,43 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QTimer>
 #include <QOpenGLWindow>
+
 #include <QSurfaceFormat>
 #include <QOpenGLFunctions>
+
 #include <QtOpenGL>
 #include <GL/glu.h>
-#include <QTimer>
+
 #include <QGLWidget>
 
 class MainWindow : public QOpenGLWindow
 {
     Q_OBJECT
-    public:
-        explicit MainWindow(QWidget *parent = 0);
-        ~MainWindow();
 
-public slots:
-        void updateAnimation();
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
 protected:
-        virtual void initializeGL();
-        virtual void resizeGL(int w, int h);
-        virtual void paintGL();
-        void paintEvent(QPaintEvent *event);
-        void resizeEvent(QResizeEvent *event);
+    virtual void initializeGL();
+    virtual void resizeGL(int w, int h);
+    virtual void paintGL();
+
+    void paintEvent(QPaintEvent *event);
+    void resizeEvent(QResizeEvent *event);
 
 private:
-        QOpenGLContext* context;
-        QOpenGLFunctions* openGLFunctions;
-        float rotation;
-        GLuint texID[1];
+    QOpenGLContext* context;
+    QOpenGLFunctions* openGLFunctions;
+
+    float rotation;
+    GLuint texID[1];
+
+public slots:
+    void updateAnimation();
+
 };
 
 #endif // MAINWINDOW_H
