@@ -8,6 +8,14 @@ function initializeGL(canvas) {
     camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
     camera.position.z = 5;
 
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(1, 1, 1).normalize();
+    scene.add(directionalLight);
+
+    var texture = THREE.ImageUtils.loadTexture('bricks.jpg');
+    var material = new THREE.MeshBasicMaterial({ map: texture });
+    var cubeGeometry = new THREE.BoxGeometry(3, 3, 3);
+
     var material = new THREE.MeshBasicMaterial({ color: 0x80c342,
                                                    shading: THREE.SmoothShading });
     var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
@@ -29,5 +37,6 @@ function resizeGL(canvas) {
 }
 
 function paintGL(canvas) {
+    cube.rotation.y -= 0.005;
     renderer.render(scene, camera);
 }

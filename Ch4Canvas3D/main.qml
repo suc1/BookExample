@@ -6,8 +6,8 @@ import "glcode.js" as GLCode
 
 Window {
     title: qsTr("Ch4Canvas3D")
-    width: 1280
-    height: 768
+    width: 480
+    height: 320
     visible: true
 
     Canvas3D {
