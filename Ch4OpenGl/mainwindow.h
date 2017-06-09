@@ -7,6 +7,7 @@
 #include <QOpenGLFunctions>
 #include <QtOpenGL>
 #include <GL/glu.h>
+#include <QTimer>
 
 class MainWindow : public QOpenGLWindow
 {
@@ -14,6 +15,9 @@ class MainWindow : public QOpenGLWindow
     public:
         explicit MainWindow(QWidget *parent = 0);
         ~MainWindow();
+
+public slots:
+        void updateAnimation();
 
 protected:
         virtual void initializeGL();
@@ -25,6 +29,7 @@ protected:
 private:
         QOpenGLContext* context;
         QOpenGLFunctions* openGLFunctions;
+        float rotation;
 };
 
 #endif // MAINWINDOW_H
