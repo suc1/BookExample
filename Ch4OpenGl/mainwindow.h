@@ -8,6 +8,7 @@
 #include <QtOpenGL>
 #include <GL/glu.h>
 #include <QTimer>
+#include <QGLWidget>
 
 class MainWindow : public QOpenGLWindow
 {
@@ -30,6 +31,7 @@ private:
         QOpenGLContext* context;
         QOpenGLFunctions* openGLFunctions;
         float rotation;
+        GLuint texID[1];
 };
 
 #endif // MAINWINDOW_H

@@ -32,6 +32,19 @@ void MainWindow::initializeGL()
     // Enable Z-buffer depth test
     glEnable(GL_DEPTH_TEST);
 
+    // Enable texturing
+    glEnable(GL_TEXTURE_2D);
+    QImage image("bricks");
+    Q_ASSERT(!image.isNull()); //????
+    QImage texture = QGLWidget::convertToGLFormat(image);
+
+    glGenTextures(1, &texID[0]);
+    glBindTexture(GL_TEXTURE_2D, texID[0]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width(), texture.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.bits());
+    // Make sure render at the correct aspect ratio
+
     resizeGL(this->width(), this->height());
 }
 
@@ -79,6 +92,10 @@ void MainWindow::paintGL()
     // Transformations
     glTranslatef(0.0, 0.0, -3.0);
     glRotatef(rotation, 1.0, 1.0, 1.0); //rotate it
+
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texID[0]);
+
     // FRONT
     glBegin(GL_POLYGON);
     glColor3f(0.0, 0.0, 0.0);
@@ -116,6 +133,8 @@ void MainWindow::paintGL()
     glVertex3f(-0.5, -0.5, 0.5); glVertex3f(-0.5, -0.5, -0.5);
     glEnd();
 
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
     glFlush();
 }
 void MainWindow::paintEvent(QPaintEvent *event)
