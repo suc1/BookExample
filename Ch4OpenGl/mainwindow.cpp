@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(100);
 
     rotation = 0;
+    moveX = 0;
+    moveZ = 0;
 }
 
 MainWindow::~MainWindow()
@@ -106,6 +108,7 @@ void MainWindow::paintGL()
     // Transformations
     glTranslatef(0.0, 0.0, -3.0);
     glRotatef(rotation, 1.0, 1.0, 1.0);
+    glTranslatef(moveX, 0.0, moveZ);
 
     // Texture mapping
     glEnable(GL_TEXTURE_2D);
@@ -188,6 +191,26 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::updateAnimation()
 {
-    rotation += 10;
+    //rotation += 10;  //make move clear
     this->update();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_W)
+    {
+        moveZ -= 0.2;
+    }
+    if (event->key() == Qt::Key_S)
+    {
+        moveZ += 0.2;
+    }
+    if (event->key() == Qt::Key_A)
+    {
+        moveX -= 0.2;
+    }
+    if (event->key() == Qt::Key_D)
+    {
+        moveX += 0.2;
+    }
 }

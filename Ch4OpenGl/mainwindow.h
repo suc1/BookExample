@@ -20,6 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void keyPressEvent(QKeyEvent *event);
 protected:
     virtual void initializeGL();
     virtual void resizeGL(int w, int h);
@@ -35,6 +36,8 @@ private:
     float rotation;
     GLuint texID[1];
 
+    float moveX;
+    float moveZ;
 public slots:
     void updateAnimation();
 
