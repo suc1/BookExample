@@ -13,12 +13,9 @@ function initializeGL(canvas) {
     scene.add(directionalLight);
 
     var texture = THREE.ImageUtils.loadTexture('bricks.jpg');
+
     var material = new THREE.MeshBasicMaterial({ map: texture });
     var cubeGeometry = new THREE.BoxGeometry(3, 3, 3);
-
-    var material = new THREE.MeshBasicMaterial({ color: 0x80c342,
-                                                   shading: THREE.SmoothShading });
-    var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
     cube = new THREE.Mesh(cubeGeometry, material);
     cube.rotation.set(0.785, 0.785, 0.0);
     scene.add(cube);
@@ -38,5 +35,6 @@ function resizeGL(canvas) {
 
 function paintGL(canvas) {
     cube.rotation.y -= 0.005;
+
     renderer.render(scene, camera);
 }
